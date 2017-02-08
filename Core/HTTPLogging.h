@@ -45,7 +45,7 @@
  * HTTPLog works exactly the same as NSLog.
  * This means you can pass it multiple variables just like NSLog.
 **/
-#import "DDLog.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 // Define logging context for every log message coming from the HTTP server.
 // The logging context can be extracted from the DDLogMessage from within the logging framework,
@@ -96,40 +96,40 @@
 
 // Define logging primitives.
 
-#define HTTPLogError(frmt, ...)    LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_ERROR,   httpLogLevel, HTTP_LOG_FLAG_ERROR,  \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogError(frmt, ...)    LOG_MAYBE(HTTP_LOG_ASYNC_ERROR,   httpLogLevel, HTTP_LOG_FLAG_ERROR,  \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogWarn(frmt, ...)     LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_WARN,    httpLogLevel, HTTP_LOG_FLAG_WARN,   \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogWarn(frmt, ...)     LOG_MAYBE(HTTP_LOG_ASYNC_WARN,    httpLogLevel, HTTP_LOG_FLAG_WARN,   \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogInfo(frmt, ...)     LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_INFO,    httpLogLevel, HTTP_LOG_FLAG_INFO,    \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogInfo(frmt, ...)     LOG_MAYBE(HTTP_LOG_ASYNC_INFO,    httpLogLevel, HTTP_LOG_FLAG_INFO,    \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogVerbose(frmt, ...)  LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_VERBOSE, httpLogLevel, HTTP_LOG_FLAG_VERBOSE, \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogVerbose(frmt, ...)  LOG_MAYBE(HTTP_LOG_ASYNC_VERBOSE, httpLogLevel, HTTP_LOG_FLAG_VERBOSE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogTrace()             LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
-                                                  HTTP_LOG_CONTEXT, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define HTTPLogTrace()             LOG_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
-#define HTTPLogTrace2(frmt, ...)   LOG_OBJC_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogTrace2(frmt, ...)   LOG_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 
-#define HTTPLogCError(frmt, ...)      LOG_C_MAYBE(HTTP_LOG_ASYNC_ERROR,   httpLogLevel, HTTP_LOG_FLAG_ERROR,   \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogCError(frmt, ...)      LOG_MAYBE(HTTP_LOG_ASYNC_ERROR,   httpLogLevel, HTTP_LOG_FLAG_ERROR,   \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogCWarn(frmt, ...)       LOG_C_MAYBE(HTTP_LOG_ASYNC_WARN,    httpLogLevel, HTTP_LOG_FLAG_WARN,    \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogCWarn(frmt, ...)       LOG_MAYBE(HTTP_LOG_ASYNC_WARN,    httpLogLevel, HTTP_LOG_FLAG_WARN,    \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogCInfo(frmt, ...)       LOG_C_MAYBE(HTTP_LOG_ASYNC_INFO,    httpLogLevel, HTTP_LOG_FLAG_INFO,    \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogCInfo(frmt, ...)       LOG_MAYBE(HTTP_LOG_ASYNC_INFO,    httpLogLevel, HTTP_LOG_FLAG_INFO,    \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogCVerbose(frmt, ...)    LOG_C_MAYBE(HTTP_LOG_ASYNC_VERBOSE, httpLogLevel, HTTP_LOG_FLAG_VERBOSE, \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogCVerbose(frmt, ...)    LOG_MAYBE(HTTP_LOG_ASYNC_VERBOSE, httpLogLevel, HTTP_LOG_FLAG_VERBOSE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-#define HTTPLogCTrace()               LOG_C_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
-                                                  HTTP_LOG_CONTEXT, @"%@[%p]: %@", THIS_FILE, self, __FUNCTION__)
+#define HTTPLogCTrace()               LOG_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, @"%@[%p]: %@", THIS_FILE, self, __FUNCTION__)
 
-#define HTTPLogCTrace2(frmt, ...)     LOG_C_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
-                                                  HTTP_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define HTTPLogCTrace2(frmt, ...)     LOG_MAYBE(HTTP_LOG_ASYNC_TRACE,   httpLogLevel, HTTP_LOG_FLAG_TRACE, \
+                                                  HTTP_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
