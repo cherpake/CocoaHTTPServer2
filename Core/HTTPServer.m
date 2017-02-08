@@ -252,6 +252,20 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		port = value;
 	});
 }
+    
+- (NSString *)host
+{
+    __block NSString *result;
+    
+    dispatch_sync(serverQueue, ^{
+        if (isRunning)
+            result = [asyncSocket localHost];
+        else
+            result = nil;
+    });
+    
+    return result;
+}
 
 /**
  * Domain on which to broadcast this service via Bonjour.

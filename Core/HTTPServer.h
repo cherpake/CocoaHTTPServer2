@@ -109,6 +109,13 @@
 - (void)setPort:(UInt16)value;
 
 /**
+ * Formatted IP address of the server.
+ * If interface is not specified, then listening socket will bind to address 0.0.0.0,
+ * which means "all IPv4 addresses on the local machine"
+ */
+- (NSString*)host;
+
+/**
  * Bonjour domain for publishing the service.
  * The default value is "local.".
  * 
