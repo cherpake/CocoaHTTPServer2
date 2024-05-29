@@ -1199,6 +1199,10 @@ static NSMutableArray *recentNonces;
 			response = [self newMultiRangeResponse:contentLength];
 		}
 	}
+    
+    if (httpResponse.contentType != nil) {
+        [response setHeaderField:@"Content-Type" value:httpResponse.contentType];
+    }
 	
 	BOOL isZeroLengthResponse = !isChunked && (contentLength == 0);
     

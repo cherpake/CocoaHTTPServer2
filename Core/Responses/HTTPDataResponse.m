@@ -24,6 +24,13 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 	return self;
 }
 
+- (id)initWithData:(NSData *)data contentType:(NSString *)contentTypeParam {
+    if (self = [self initWithData:data]) {
+        contentType = contentTypeParam;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
 	HTTPLogTrace();
@@ -74,6 +81,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 	HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
+}
+
+- (NSString*)contentType {
+    return contentType;
 }
 
 @end
