@@ -1200,7 +1200,7 @@ static NSMutableArray *recentNonces;
 		}
 	}
     
-    if (httpResponse.contentType != nil) {
+    if ([httpResponse respondsToSelector:@selector(contentType)] && httpResponse.contentType != nil) {
         [response setHeaderField:@"Content-Type" value:httpResponse.contentType];
     }
 	
